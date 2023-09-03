@@ -29,10 +29,10 @@ app.listen(3000, () => {
 //CREATE NEW USER
 
 app.post("/register", async (request, response) => {
-  const { username, name, password, gender, location } = request.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const selectUserQuery = `SELECT * FROM user WHERE username='${username}'`;
-  const dbUser = await db.get(selectUserQuery);
+  let { username, name, password, gender, location } = request.body;
+  let hashedPassword = await bcrypt.hash(password, 10);
+  let selectUserQuery = `SELECT * FROM user WHERE username='${username}'`;
+  let dbUser = await db.get(selectUserQuery);
 
   if (dbUser === undefined) {
     if (password.length > 4) {
